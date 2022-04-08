@@ -5,10 +5,10 @@ class Auth extends CI_Controller
 	public function karyawan_algo($value)
 	{
 		$id = 'FUCK';
-		$range = rand(1,6);
+		$range = rand(1, 6);
 		$domain = substr(hash('md5', $id), 6, 3);
-		$unique = substr(hash('md5', $value), $range = rand(1,6), 2);
-		return strtoupper($domain.$unique);
+		$unique = substr(hash('md5', $value), $range = rand(1, 6), 2);
+		return strtoupper($domain . $unique);
 	}
 
 	/**
@@ -27,12 +27,29 @@ class Auth extends CI_Controller
 
 			$query = $this->db->get_where('karyawan', array('email' => $e, 'password' => $p));
 
-			if($query->num_rows() == 1)
-			{
-				// Kalo berhasil
-				echo 'berhasil';
+			if ($query->num_rows() == 1) {
+				/**
+				 * 1. Buat Session
+				 * 2. Redirect ke Admin
+				 */
+				$data = $query->row();
+
+				$arr = array(
+					'user' => array(
+						'nama' => $data->nama,
+						'email' => $data->email,
+						'code' => $data->code,
+						'jabatan' => $data->jabatan,
+						'jobdesk' => $data->jobdesk
+					)
+				);
+				$this->session->set_userdata($arr);
+
+				redirect('admin');
 			} else {
-				echo 'gagal';
+				$this->load->view('auth/template/head');
+				$this->load->view('auth/login');
+				$this->load->view('auth/template/footer');
 			}
 		} else {
 			$this->load->view('auth/template/head');
@@ -47,5 +64,11 @@ class Auth extends CI_Controller
 		$this->load->view('auth/template/head');
 		$this->load->view('auth/register');
 		$this->load->view('auth/template/footer');
+	}
+
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('/');
 	}
 }

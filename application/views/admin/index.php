@@ -12,14 +12,11 @@
 		<div class="col-xl-8">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Jobdesk Penelitian</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Selamat Datang, Pimpinan <?= $this->session->user['nama'] ?>!</h6>
 				</div>
 				<div class="card-body">
-					<p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-						CSS bloat and poor page performance. Custom CSS classes are used to create
-						custom components and custom utility classes.</p>
-					<p class="mb-0">Before working with this theme, you should become familiar with the
-						Bootstrap framework, especially the utility classes.</p>
+					<p>Ini adalah dashboard dimana anda dapat melakukan pengecekan rekap daily report yang dilakukan oleh masing-masing karyawan anda, tanpa harus menunggu laporan tiba di meja anda. anda juga dapat menerima hasil laporan dari SPMI secara realtime disini.</p>
+					<p class="mb-0">Silahkan pergunaakn fitur aplikasi sebagai mestinya.</p>
 				</div>
 			</div>
 		</div>
@@ -172,15 +169,15 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Ingin keluar?</h5>
 				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
-			<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+			<div class="modal-body">Apakah anda yakin ingin keluar?</div>
 			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<a class="btn btn-primary" href="login.html">Logout</a>
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+				<a class="btn btn-primary" href="<?= base_url('auth/logout')?>">Ya, keluar.</a>
 			</div>
 		</div>
 	</div>
