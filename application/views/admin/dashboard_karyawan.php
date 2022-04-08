@@ -198,11 +198,11 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Nama Kegiatan</label>
-						<input name="kegiatan" class="form-control" placeholder="cth: Pengerjaan Input Data Siswa">
+						<input name="kegiatan" class="form-control">
 					</div>
 					<div class="form-group">
 						<label>Detail Kegiatan</label>
-						<textarea name="deskripsi" class="form-control" style="resize: none;" rows="5" placeholder="cth: Menginput data siswa kelas X"></textarea>
+						<textarea name="deskripsi" class="form-control" style="resize: none;" rows="5"></textarea>
 					</div>
 				</div>
 				<div class="modal-footer">

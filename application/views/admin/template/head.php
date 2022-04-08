@@ -32,21 +32,12 @@
 			<div id="content">
 
 				<!-- Topbar -->
-				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 shadow sticky-top">
 
 					<h4 class="navbar-brand nav-link mr-auto mb-0">Daily Report</h4>
 
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
-
-						<div class="d-flex align-items-center">
-							<a href="#" class="nav-link">Dashboard</a>
-							<a href="#" class="nav-link">Input Report</a>
-							<a href="#" class="nav-link">Report</a>
-						</div>
-
-
-
 
 
 						<div class="topbar-divider d-none d-sm-block"></div>
@@ -63,17 +54,14 @@
 							<!-- Dropdown - User Information -->
 							<div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 								<a class="dropdown-item" href="#">
+									<i class="fas fa-th-large fa-sm fa-fw mr-2 text-gray-400"></i>
+									Dashboard
+								</a>
+								<a class="dropdown-item" href="#">
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Profile
 								</a>
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									Settings
-								</a>
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-									Activity Log
-								</a>
+							
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
