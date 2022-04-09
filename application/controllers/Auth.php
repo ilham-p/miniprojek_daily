@@ -21,6 +21,7 @@ class Auth extends CI_Controller
 	 */
 	function login()
 	{
+		$data = array('title' => 'Login');
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$e = $this->input->post('email');
 			$p = hash('md5', $this->input->post('password'));
@@ -47,24 +48,17 @@ class Auth extends CI_Controller
 
 				redirect('admin');
 			} else {
-				$this->load->view('auth/template/head');
+				$this->load->view('auth/template/head', $data);
 				$this->load->view('auth/login');
 				$this->load->view('auth/template/footer');
 			}
 		} else {
-			$this->load->view('auth/template/head');
+			$this->load->view('auth/template/head', $data);
 			$this->load->view('auth/login');
 			$this->load->view('auth/template/footer');
 		}
 	}
 
-	public function register()
-	{
-		// Register
-		$this->load->view('auth/template/head');
-		$this->load->view('auth/register');
-		$this->load->view('auth/template/footer');
-	}
 
 	public function logout()
 	{
