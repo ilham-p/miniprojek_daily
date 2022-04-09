@@ -20,8 +20,8 @@
 <script src="<?= base_url('assets/vendor/datatables/jquery.dataTables.min.js') ?>"></script>
 <script src="<?= base_url('assets/vendor/datatables/dataTables.bootstrap4.min.js') ?>"></script>
 <script src="<?= base_url('assets/vendor/chart.js/Chart.min.js') ?>"></script>
-<script src="<?= base_url('assets/js/main.js') ?>"></script>
-<script src="<?= base_url('assets/js/chart.js') ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
 <script>
 	$.ajax({
 		url: "<?= base_url('admin/laporan') ?>",
@@ -35,7 +35,7 @@
 					targets: 3,
 					data: null,
 					render: function(data, type, row, meta) {
-						switch(data[3]) {
+						switch (data[3]) {
 							case '1':
 								return 'Tertunda';
 								break;
@@ -52,6 +52,51 @@
 		}
 	});
 </script>
+
+<script>
+	const stats_bulan = $("#statistik_bulan");
+	$.ajax({
+		url: '<?= base_url('admin/stats_chart/') ?>',
+		method: 'post',
+		success: (e) => {
+			e = JSON.parse(e);
+			console.log(e)
+			res = [];
+			for (let x in e) {
+				res.push(e[x]);
+			}
+			console.log(res)
+			
+			const myChart = new Chart(stats_bulan, {
+				type: "line",
+				data: {
+					datasets: [{
+						label: "Jumlah Data",
+						data: res,
+						borderColor: 'rgb(75, 192, 192)',
+						borderWidth: 2,
+						tension: 0.2,
+					}],
+				},
+				options: {
+					scales: {
+						y: {
+							beginAtZero: true,
+						},
+						x: {
+							type: "time",
+							time: {
+								unit: 'day'
+							}
+
+						},
+					},
+				},
+			});
+		}
+	})
+</script>
+
 </body>
 
 </html>

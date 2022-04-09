@@ -4,9 +4,7 @@ class Laporan extends CI_Model
 {
 	public function input_laporan(array $data = [])
 	{
-		if($_SERVER["REQUEST_METHOD"] == "POST")
-		{
-			
+		if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 	}
 	/**
@@ -31,6 +29,17 @@ class Laporan extends CI_Model
 		$bulan = date('m');
 		$tahun = date('Y');
 		return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->where("tanggalposting BETWEEN '{$tahun}/{$bulan}/1' AND '{$tahun}/{$bulan}/{$tg_akhir}'")->get('laporan')->result();
+	}
+
+	public function count_laporan_bulanan($status = null)
+	{
+		$tg_akhir = days_in_month(date('m'), date('Y'));
+		$bulan = date('m');
+		$tahun = date('Y');
+		if ($status) {
+			return $this->db->select('COUNT(*) AS data, tanggalposting')->join('karyawan', 'karyawan.id = laporan.pelapor')->where("status = {$status} AND tanggalposting BETWEEN '{$tahun}/{$bulan}/1' AND '{$tahun}/{$bulan}/{$tg_akhir}'")->group_by('DATE(laporan.tanggalposting)')->get('laporan')->result();
+		}
+		return $this->db->select('COUNT(*) AS data, tanggalposting')->join('karyawan', 'karyawan.id = laporan.pelapor')->where("tanggalposting BETWEEN '{$tahun}/{$bulan}/1' AND '{$tahun}/{$bulan}/{$tg_akhir}'")->group_by('DATE(laporan.tanggalposting)')->get('laporan')->result();
 	}
 
 	/**

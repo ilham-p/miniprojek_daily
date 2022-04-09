@@ -128,7 +128,7 @@
 					<?php foreach ($jabatan as $j) : ?>
 						<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
 							<span><?= $j->namajabatan ?></span>
-							<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+
 						</div>
 					<?php endforeach; ?>
 				</div>
@@ -247,3 +247,4 @@
 		</div>
 	</div>
 </form>
+

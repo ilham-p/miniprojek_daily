@@ -19,6 +19,7 @@ class Admin extends CI_Controller
 			'jobdesk' => $this->Jobdesk->get_jobdesk(),
 		);
 
+		// var_dump($this->stats_chart());
 		$this->load->view('admin/template/head');
 		$this->load->view('admin/index', $data);
 		$this->load->view('admin/template/foot');
@@ -29,9 +30,26 @@ class Admin extends CI_Controller
 		// ["20/04/2022", "Menulis Karya Ilmiah", "Jhon Doe", "Diterima"]
 		$res = $this->Laporan->get_laporan();
 		$data = array();
-		foreach($res as $r) {
-			array_push($data, array(date('d/m/Y',strtotime($r->tanggalposting)), $r->kegiatan, $r->nama, $r->status ));
+		foreach ($res as $r) {
+			array_push($data, array(date('d/m/Y', strtotime($r->tanggalposting)), $r->kegiatan, $r->nama, $r->status));
 		}
+		echo json_encode($data);
+	}
+
+	public function stats_chart($status = null)
+	{
+		$res = $this->Laporan->count_laporan_bulanan();
+		$data = array();
+		foreach ($res as $r) {
+			array_push(
+				$data,
+				array(
+					'x' => date('Y-m-d',strtotime($r->tanggalposting)),
+					'y' => $data['y'] += $r->data
+				)
+			);
+		}
+
 		echo json_encode($data);
 	}
 }
