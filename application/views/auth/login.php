@@ -17,19 +17,17 @@
 									<h3 class="h6 text-gray-500 mb-4">Silahkan masuk untuk melanjutkan..</h3>
 								</div>
 								<hr>
-								<form class="user">
+								<form class="user" method="POST" action="<?= base_url() ?>">
 									<div class="form-group">
-										<input type="email" class="form-control form-control-user" placeholder="Masukan alamat email...">
+										<input type="email" class="email form-control form-control-user" name="email" placeholder="Masukan alamat email...">
 									</div>
 									<div class="form-group">
-										<input type="password" class="form-control form-control-user" placeholder="Masukan kata sandi">
+										<input type="password" class="password form-control form-control-user" name="password" placeholder="Masukan kata sandi">
 									</div>
 									<hr>
 									<button class="btn btn-primary btn-user btn-block">
 										Masuk Sekarang!
 									</button>
-
-
 								</form>
 							</div>
 						</div>

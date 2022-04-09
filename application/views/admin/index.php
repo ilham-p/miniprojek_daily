@@ -12,14 +12,10 @@
 		<div class="col-xl-8">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">Jobdesk Penelitian</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Ini aktivitas laporan karyawan anda, Pimpinan!</h6>
 				</div>
 				<div class="card-body">
-					<p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-						CSS bloat and poor page performance. Custom CSS classes are used to create
-						custom components and custom utility classes.</p>
-					<p class="mb-0">Before working with this theme, you should become familiar with the
-						Bootstrap framework, especially the utility classes.</p>
+					<canvas id="statistik_bulan" class="w-full h-full"></canvas>
 				</div>
 			</div>
 		</div>
@@ -105,8 +101,16 @@
 				<!-- Card Body -->
 				<div class="card-body">
 					<!-- Tabel -->
-
-					Tabel Log laporan per Bulan
+					<table id="laporan_bulan" class="display" style="width:100%">
+						<thead>
+							<tr>
+								<th>Tanggal Kegiatan</th>
+								<th>Nama Kegiatan</th>
+								<th>Pelapor</th>
+								<th>Status</th>
+							</tr>
+						</thead>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -115,7 +119,7 @@
 			<div class="card shadow mb-4">
 				<!-- Card Header - Dropdown -->
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-					<h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+					<h6 class="m-0 font-weight-bold text-primary">List Jabatan</h6>
 					<div class="dropdown no-arrow">
 						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -130,23 +134,108 @@
 					</div>
 				</div>
 				<!-- Card Body -->
-				<div class="card-body">
-					<div class="chart-pie pt-4 pb-2">
-						<canvas id="myPieChart"></canvas>
+				<div class="card-body" style="height:200px; overflow: auto;">
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
 					</div>
-					<div class="mt-4 text-center small">
-						<span class="mr-2">
-							<i class="fas fa-circle text-primary"></i> Direct
-						</span>
-						<span class="mr-2">
-							<i class="fas fa-circle text-success"></i> Social
-						</span>
-						<span class="mr-2">
-							<i class="fas fa-circle text-info"></i> Referral
-						</span>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
 					</div>
 				</div>
+				<div class="card-footer text-center"></div>
 			</div>
+
+			<div class="card shadow mb-4">
+				<!-- Card Header - Dropdown -->
+				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+					<h6 class="m-0 font-weight-bold text-primary">List Jobdesk</h6>
+					<div class="dropdown no-arrow">
+						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+							<div class="dropdown-header">Dropdown Header:</div>
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+					</div>
+				</div>
+				<!-- Card Body -->
+				<div class="card-body" style="height:200px; overflow: auto;">
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+						<span>Peneliti</span>
+						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+					</div>
+				</div>
+				<div class="card-footer text-center"></div>
+			</div>
+
+
+
 		</div>
 	</div>
 
@@ -172,15 +261,15 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Ingin keluar?</h5>
 				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
-			<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+			<div class="modal-body">Apakah anda yakin ingin keluar?</div>
 			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<a class="btn btn-primary" href="login.html">Logout</a>
+				<button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
+				<a class="btn btn-primary" href="<?= base_url('auth/logout') ?>">Ya, keluar.</a>
 			</div>
 		</div>
 	</div>
