@@ -27,7 +27,10 @@ class Laporan extends CI_Model
 				return $this->db->get_where('laporan', array('status' => $status, 'pelapor' => $pelapor))->result();
 			}
 		}
-		return $this->db->get('laporan')->result();
+		$tg_akhir = days_in_month(date('m'), date('Y'));
+		$bulan = date('m');
+		$tahun = date('Y');
+		return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->where("tanggalposting BETWEEN '{$tahun}/{$bulan}/1' AND '{$tahun}/{$bulan}/{$tg_akhir}'")->get('laporan')->result();
 	}
 
 	/**
@@ -43,9 +46,9 @@ class Laporan extends CI_Model
 	{
 		if ($status) {
 			if ($pelapor) {
-				return $this->db->get_where('laporan', array('status' => $status))->num_rows();
-			} else {
 				return $this->db->get_where('laporan', array('status' => $status, 'pelapor' => $pelapor))->num_rows();
+			} else {
+				return $this->db->get_where('laporan', array('status' => $status))->num_rows();
 			}
 		}
 		return $this->db->get('laporan')->num_rows();

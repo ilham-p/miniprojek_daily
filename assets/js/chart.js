@@ -57,9 +57,13 @@ $(document).ready(() => {
 				y: {
 					beginAtZero: true,
 				},
+				x: {
+					type: "time",
+					time: {
+						unit: "week",
+					},
+				},
 			},
 		},
 	});
-
-
 });

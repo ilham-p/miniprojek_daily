@@ -27,7 +27,7 @@
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
 									Laporan Terkirim</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">40.000</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($report_valid) ?></div>
 							</div>
 							<div class="col-auto">
 								<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -45,7 +45,7 @@
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
 									Laporan Ditolak</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">215.000</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($report_reject) ?></div>
 							</div>
 							<div class="col-auto">
 								<i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -63,7 +63,7 @@
 							<div class="col mr-2">
 								<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
 									Laporan Tertunda</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($report_delay) ?></div>
 							</div>
 							<div class="col-auto">
 								<i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -101,7 +101,7 @@
 				<!-- Card Body -->
 				<div class="card-body">
 					<!-- Tabel -->
-					<table id="laporan_bulan" class="display" style="width:100%">
+					<table id="laporan_bulan" class="table table-bordered" style="width:100%">
 						<thead>
 							<tr>
 								<th>Tanggal Kegiatan</th>
@@ -120,57 +120,17 @@
 				<!-- Card Header - Dropdown -->
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">List Jabatan</h6>
-					<div class="dropdown no-arrow">
-						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-							<div class="dropdown-header">Dropdown Header:</div>
-							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">Another action</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</div>
-					</div>
+
 				</div>
 				<!-- Card Body -->
 				<div class="card-body" style="height:200px; overflow: auto;">
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
+
+					<?php foreach ($jabatan as $j) : ?>
+						<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+							<span><?= $j->namajabatan ?></span>
+							<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+						</div>
+					<?php endforeach; ?>
 				</div>
 				<div class="card-footer text-center"></div>
 			</div>
@@ -179,57 +139,16 @@
 				<!-- Card Header - Dropdown -->
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">List Jobdesk</h6>
-					<div class="dropdown no-arrow">
-						<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-						</a>
-						<div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-							<div class="dropdown-header">Dropdown Header:</div>
-							<a class="dropdown-item" href="#">Action</a>
-							<a class="dropdown-item" href="#">Another action</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Something else here</a>
-						</div>
-					</div>
+					<a type="button" class="align-items-center" data-toggle="modal" data-target="#jobdesk_add" href="javascript:void(0)"><i class="fas fa-plus"></i></a>
 				</div>
 				<!-- Card Body -->
 				<div class="card-body" style="height:200px; overflow: auto;">
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
-					<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-						<span>Peneliti</span>
-						<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
-					</div>
+					<?php foreach ($jobdesk as $j) : ?>
+						<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
+							<span><?= $j->namajobdesk ?></span>
+							<span class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-trash-alt fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></span>
+						</div>
+					<?php endforeach; ?>
 				</div>
 				<div class="card-footer text-center"></div>
 			</div>
@@ -298,6 +217,32 @@
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
 					<button type="button" class="btn btn-primary">Kirim Laporan</button>
 				</div>
+			</div>
+		</div>
+	</div>
+</form>
+<form class="modal fade" id="jobdesk_add" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Input Laporan Baru</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="form-group">
+					<label>Nama Kegiatan</label>
+					<input name="nama_jd" class="form-control" placeholder="cth: Observasi">
+				</div>
+				<div class="form-group">
+					<label>Detail Kegiatan</label>
+					<textarea name="keterangan_jd" class="form-control" style="resize: none;" rows="5" placeholder="cth: Jobdesk ini mengerjakan pekerjaan dengan mesin"></textarea>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+				<button type="button" class="btn btn-primary">Kirim Laporan</button>
 			</div>
 		</div>
 	</div>

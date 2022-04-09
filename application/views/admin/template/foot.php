@@ -22,7 +22,36 @@
 <script src="<?= base_url('assets/vendor/chart.js/Chart.min.js') ?>"></script>
 <script src="<?= base_url('assets/js/main.js') ?>"></script>
 <script src="<?= base_url('assets/js/chart.js') ?>"></script>
+<script>
+	$.ajax({
+		url: "<?= base_url('admin/laporan') ?>",
+		method: 'get',
+		success: (e) => {
+			console.log();
+			$("#laporan_bulan").DataTable({
 
+				data: JSON.parse(e),
+				columnDefs: [{
+					targets: 3,
+					data: null,
+					render: function(data, type, row, meta) {
+						switch(data[3]) {
+							case '1':
+								return 'Tertunda';
+								break;
+							case '2':
+								return 'Diterima';
+								break;
+							case '3':
+								return 'Ditolak';
+								break;
+						}
+					}
+				}]
+			});
+		}
+	});
+</script>
 </body>
 
 </html>
