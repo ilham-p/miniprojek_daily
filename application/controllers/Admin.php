@@ -20,9 +20,8 @@ class Admin extends CI_Controller
 		);
 
 		// var_dump($this->Karyawan->get_karyawan());
-		$this->load->view('admin/template/head');
-		$this->load->view('admin/index', $data);
-		$this->load->view('admin/template/foot');
+		$this->x_view($this->session->user['jabatan'], $data);
+
 	}
 
 	public function laporan()
@@ -40,7 +39,7 @@ class Admin extends CI_Controller
 	{
 		// ["20/04/2022", "Menulis Karya Ilmiah", "Jhon Doe", "Diterima"]
 		$res = $this->Karyawan->get_karyawan();
-		$data = array("data"=> array());
+		$data = array("data" => array());
 		foreach ($res as $r) {
 			array_push($data['data'], array($r->code, $r->nama, $r->email, $r->namajabatan, $r->namajobdesk));
 		}
@@ -56,12 +55,27 @@ class Admin extends CI_Controller
 			array_push(
 				$data,
 				array(
-					'x' => date('Y-m-d',strtotime($r->tanggalposting)),
+					'x' => date('Y-m-d', strtotime($r->tanggalposting)),
 					'y' => $r->data
 				)
 			);
 		}
 
 		echo json_encode($data);
+	}
+
+	public function x_view($jabatan, $data)
+	{
+		switch ($jabatan) {
+			case 1:
+				$this->load->view('admin/template/head');
+				$this->load->view('admin/pimpinan', $data);
+				$this->load->view('admin/template/foot');
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+		}
 	}
 }
