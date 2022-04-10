@@ -13,3 +13,10 @@ function toastNotif(icon, judul, pesan, headColor, headTextColor) {
 	</div>`
 }
 
+$(document).ready(() => {
+	const tanggalToggle = $('#ubah_tanggal')
+	tanggalToggle.on('change',(e) => {
+		console.log(tanggalToggle.val())
+	})
+})
+
