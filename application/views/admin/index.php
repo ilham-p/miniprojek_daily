@@ -165,7 +165,7 @@
 				<!-- Card Header - Dropdown -->
 				<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
 					<h6 class="m-0 font-weight-bold text-primary">List Karyawan</h6>
-					<a href="javascript:void(0)" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" data-toggle="modal" data-target="#inputModal"><i class="fas fa-plus-circle fa-sm text-white-50"></i> Tambah Laporan</a>
+					<a href="javascript:void(0)" class="d-none d-sm-inline-block btn btn-sm btn-success shadow-sm" data-toggle="modal" data-target="#inputModal"><i class="fas fa-plus-circle fa-sm text-white-50"></i> Tambah Karyawan</a>
 					<!-- <a type="button" class="align-items-center" data-toggle="modal" data-target="#jobdesk_add" href="javascript:void(0)"><i class="fas fa-plus"></i></a> -->
 				</div>
 				<!-- Card Body -->
