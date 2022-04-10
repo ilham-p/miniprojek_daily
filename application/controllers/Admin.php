@@ -73,8 +73,14 @@ class Admin extends CI_Controller
 				$this->load->view('admin/template/foot');
 				break;
 			case 2:
+				$this->load->view('admin/template/head');
+				$this->load->view('admin/spmi', $data);
+				$this->load->view('admin/template/foot');
 				break;
 			case 3:
+				$this->load->view('admin/template/head');
+				$this->load->view('admin/karyawan', $data);
+				$this->load->view('admin/template/foot');
 				break;
 		}
 	}
