@@ -19,7 +19,7 @@ class Admin extends CI_Controller
 			'jobdesk' => $this->Jobdesk->get_jobdesk(),
 		);
 
-		// var_dump($this->stats_chart());
+		// var_dump($this->Karyawan->get_karyawan());
 		$this->load->view('admin/template/head');
 		$this->load->view('admin/index', $data);
 		$this->load->view('admin/template/foot');
@@ -29,23 +29,35 @@ class Admin extends CI_Controller
 	{
 		// ["20/04/2022", "Menulis Karya Ilmiah", "Jhon Doe", "Diterima"]
 		$res = $this->Laporan->get_laporan();
-		$data = array();
+		$data = array("data" => array());
 		foreach ($res as $r) {
-			array_push($data, array(date('d/m/Y', strtotime($r->tanggalposting)), $r->kegiatan, $r->nama, $r->status));
+			array_push($data['data'], array(date('d/m/Y', strtotime($r->tanggalposting)), $r->kegiatan, $r->nama, $r->status));
+		}
+		echo json_encode($data);
+	}
+
+	public function karyawan()
+	{
+		// ["20/04/2022", "Menulis Karya Ilmiah", "Jhon Doe", "Diterima"]
+		$res = $this->Karyawan->get_karyawan();
+		$data = array("data"=> array());
+		foreach ($res as $r) {
+			array_push($data['data'], array($r->code, $r->nama, $r->email, $r->namajabatan, $r->namajobdesk));
 		}
 		echo json_encode($data);
 	}
 
 	public function stats_chart($status = null)
 	{
-		$res = $this->Laporan->count_laporan_bulanan();
+		$res = $this->Laporan->count_laporan_bulanan($status);
+		$loop = 0;
 		$data = array();
 		foreach ($res as $r) {
 			array_push(
 				$data,
 				array(
 					'x' => date('Y-m-d',strtotime($r->tanggalposting)),
-					'y' => $data['y'] += $r->data
+					'y' => $r->data
 				)
 			);
 		}
