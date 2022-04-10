@@ -11,6 +11,9 @@
 <!-- End of Content Wrapper -->
 
 </div>
+<div id="toast-container" class="position-fixed top-0 right-0 p-3" style="z-index: 10000; right: 0; top: 0;">
+	
+</div>
 <!-- End of Page Wrapper -->
 <script src="<?= base_url('assets/vendor/jquery/jquery.min.js') ?>"></script>
 <script src="<?= base_url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
@@ -22,7 +25,10 @@
 <script src="<?= base_url('assets/vendor/chart.js/Chart.min.js') ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
+<script src="<?= base_url('assets/js/main.js')?>"></script>
+
 <script>
+	$('.toast').toast();
 	const tabelLaporan = $("#laporan_bulan").DataTable({
 		ajax: '<?= base_url('admin/laporan') ?>',
 		lengthChange: false,
@@ -149,6 +155,68 @@
 	})
 </script>
 
+<script>
+	const nama = $('input[name="nama_karyawan"]')
+	const email = $('input[name="email_karyawan"]')
+	const jabatan = $('select[name="jabatan_karyawan"]')
+	const jobdesk = $('select[name="jobdesk_karyawan"]')
+	const bio = $('textarea[name="bio_karyawan"]')
+
+	$(jabatan).on('change', function(e) {
+		let _curJabatan = jabatan.val();
+		if (_curJabatan != 0) {
+			$.ajax({
+				url: '<?= base_url('admin/jabatan_jobdesk/') ?>' + _curJabatan,
+				success: function(x) {
+					let data = JSON.parse(x);
+					// console.log(data[0]);
+					let items = '';
+					data.forEach(x => {
+						// console.log(x)
+						items += `<option value="${x.kodejobdesk}">${x.namajobdesk}</option>`
+						$(jobdesk).attr('disabled', false)
+					})
+					$(jobdesk).html(items)
+				}
+			})
+		} else {
+			$(jobdesk).html('');
+			$(jobdesk).attr('disabled', true)
+		}
+	})
+
+	$('#karyawan_add').submit((e) => {
+		e.preventDefault();
+
+		// Ambil value
+		// verifikasi value
+		if (jabatan.val() && nama.val() && email.val() && jobdesk.val() != '') {
+			$.ajax({
+				url: '<?= base_url('admin/karyawan_submit') ?>',
+				data: {
+					nama: nama.val(),
+					email: email.val(),
+					jabatan: jabatan.val(),
+					jobdesk: jobdesk.val(),
+					bio: bio.val()
+				},
+				type: 'json',
+				method: 'POST',
+				complete: () => {
+					$('#toast-container').html(toastNotif('fa-check','Karyawan Berhasil Disimpan!', 'Data yang anda input sudah berhasil disimpan', 'bg-success', 'text-white'))
+					$('.toast').toast('show');
+					$('#karyawan_add')[0].reset();
+					$('#karyawan_add').modal('toggle');
+					tabelKaryawan.ajax.reload()
+				}
+			})
+		} else {
+			alert('Harap periksa kembali form anda!')
+		}
+
+		// submit
+	})
+</script>
 </body>
 
 </html>

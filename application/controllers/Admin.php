@@ -19,7 +19,7 @@ class Admin extends CI_Controller
 			'jobdesk' => $this->Jobdesk->get_jobdesk(),
 		);
 
-		// var_dump($this->Karyawan->get_karyawan());
+		// echo print_r($this->Jabatan->get_jabatan_desk(1));
 		$this->x_view($this->session->user['jabatan'], $data);
 
 	}
@@ -76,6 +76,41 @@ class Admin extends CI_Controller
 				break;
 			case 3:
 				break;
+		}
+	}
+
+	public function jabatan_jobdesk($id = null)
+	{
+
+		if ($id) {
+			$res = $this->Jabatan->get_jabatan_desk($id);
+			$data = array();
+			foreach ($res as $r) {
+				array_push($data, array($r->kodejobdesk, $r->namajobdesk, $r->keterangan));
+			}
+			echo json_encode($res);
+		}
+	}
+
+	public function karyawan_submit()
+	{
+		$pass = hash('md5', 'daily123');
+		if($_SERVER['REQUEST_METHOD'] == "POST")
+		{
+			$data = array(
+				'nama' => $this->input->post('nama'),
+				'email' => $this->input->post('email'),
+				'password' => $pass,
+				'code' => $this->Karyawan->algo($this->input->post('nama')),
+				'jabatan' => $this->input->post('jabatan'),
+				'jobdesk' => $this->input->post('jobdesk'),
+				'bio' => $this->input->post('bio')
+			);
+			$this->Karyawan->add_karyawan($data);
+			
+			return array(
+				'status' => 200
+			);
 		}
 	}
 }
