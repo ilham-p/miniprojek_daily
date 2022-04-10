@@ -3,8 +3,6 @@ $(document).ready(() => {
 	const myChart = new Chart(stats_bulan, {
 		type: "line",
 		data: {
-			labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-
 			datasets: [
 				{
 					label: "Laporan Valid",
@@ -57,9 +55,13 @@ $(document).ready(() => {
 				y: {
 					beginAtZero: true,
 				},
+				x: {
+					type: "time",
+					time: {
+						unit: "day",
+					},
+				},
 			},
 		},
 	});
-
-
 });
