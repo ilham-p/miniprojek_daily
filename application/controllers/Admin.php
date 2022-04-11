@@ -19,7 +19,7 @@ class Admin extends CI_Controller
 			'jobdesk' => $this->Jobdesk->get_jobdesk(),
 		);
 
-		// echo print_r($this->laporan_karyawan(7));
+		// echo print_r($this->laporan_masuk());
 		$this->x_view($this->session->user['jabatan'], $data);
 	}
 
@@ -48,7 +48,6 @@ class Admin extends CI_Controller
 	public function stats_chart($status = null)
 	{
 		$res = $this->Laporan->count_laporan_bulanan($status);
-		$loop = 0;
 		$data = array();
 		foreach ($res as $r) {
 			array_push(
@@ -59,7 +58,6 @@ class Admin extends CI_Controller
 				)
 			);
 		}
-
 		echo json_encode($data);
 	}
 
@@ -148,5 +146,31 @@ class Admin extends CI_Controller
 		);
 		$res = $this->Laporan->input_laporan($data);
 		return $res;
+	}
+
+	public function laporan_masuk()
+	{
+		// ["20/04/2022", "Menulis Karya Ilmiah", "Jhon Doe", "Diterima"]
+		$res = $this->Laporan->get_laporan(1);
+		$data = array("data" => array());
+		foreach ($res as $r) {
+			array_push($data['data'], array(date('d/m/Y', strtotime($r->tanggalposting)), $r->kegiatan, $r->deskripsi, $r->nama, $r->kodelaporan));
+		}
+		echo json_encode($data);
+		// return $data;
+	}
+
+	public function laporan_acc($mode)
+	{
+		$id = $this->input->post('id');
+		switch($mode)
+		{
+			case 'accept':
+				$this->Laporan->update_laporan($mode, $id);
+				break;
+			case 'reject':
+				$this->Laporan->update_laporan($mode, $id);
+				break;
+		}
 	}
 }
