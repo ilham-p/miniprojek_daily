@@ -49,7 +49,7 @@
 							<a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<div class="d-flex flex-column text-right">
 									<span class="mr-2 d-none d-lg-inline text-dark small-xs"><?= $this->session->user['nama'] ?></span>
-									<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->db->get_where('jabatan', array('id', $this->session->user['jabatan']))->row()->namajabatan ?></span>
+									<span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $this->db->get_where('jabatan', array('kodejabatan' => $this->session->user['jabatan']))->row()->namajabatan ?></span>
 								</div>
 								<img class="img-profile rounded-circle" src="<?= base_url('assets/img/undraw_profile.svg') ?>">
 							</a>

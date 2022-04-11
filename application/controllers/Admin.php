@@ -70,16 +70,22 @@ class Admin extends CI_Controller
 			case 1:
 				$this->load->view('admin/template/head');
 				$this->load->view('admin/pimpinan', $data);
+				$this->load->view('admin/template/plugins');
+				$this->load->view('admin/template/script_admin');
 				$this->load->view('admin/template/foot');
 				break;
 			case 2:
 				$this->load->view('admin/template/head');
 				$this->load->view('admin/spmi', $data);
+				$this->load->view('admin/template/plugins');
+				$this->load->view('admin/template/script_spmi');
 				$this->load->view('admin/template/foot');
 				break;
 			case 3:
 				$this->load->view('admin/template/head');
 				$this->load->view('admin/karyawan', $data);
+				$this->load->view('admin/template/plugins');
+				$this->load->view('admin/template/script_karyawan');
 				$this->load->view('admin/template/foot');
 				break;
 		}
