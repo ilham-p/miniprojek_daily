@@ -22,4 +22,4 @@ CodeIgniter adalah Kerangka Pengembangan Aplikasi - sebuah toolkit - untuk orang
 
 	Setelah dependency selesai terinstal di repositori anda, maka selanjutnya import database repositori.
 
-## Selesai
+## <center>Selesai</center>
