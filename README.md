@@ -1,18 +1,28 @@
-###################
-What is CodeIgniter
-###################
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+# Daily Report App
+##### Powered by [Codeigniter](https://www.google.com) 3.1.11
+<br>
+CodeIgniter adalah Kerangka Pengembangan Aplikasi - sebuah toolkit - untuk orang-orang yang membangun situs web menggunakan PHP. Tujuannya adalah untuk memungkinkan Anda mengembangkan proyek jauh lebih cepat daripada yang Anda bisa jika Anda menulis kode dari awal, dengan menyediakan kumpulan perpustakaan yang kaya untuk tugas-tugas umum yang dibutuhkan, serta sederhana antarmuka dan struktur logis untuk mengakses perpustakaan ini. CodeIgniter memungkinkan Anda secara kreatif fokus pada proyek Anda dengan meminimalkan jumlah kode yang dibutuhkan untuk tugas yang diberikan.
 
-*******************
-Release Information
-*******************
+### Cara Instalasi
+- Clone Repositori
+	
+	Clone repositori ke dalam disk anda melalui terminal di lokasi disk yang telah anda tentukan
+	```
+	git clone https://github.com/ilham-p/miniprojek_daily.git
+	```
+	atau Anda bisa mendownload repositori melalui tombol hijau diatas.
+- Instal Dependency Repositori
+	
+	Untuk menginstall dependency anda bisa buka terminal pada repositori anda, kemudian ketikan perintah :
+	```
+	composer install
+	```
+- Import Database
+
+	Setelah dependency selesai terinstal di repositori anda, maka selanjutnya import database repositori.
+
+
 
 This repo contains in-development code for future releases. To download the
 latest stable release please visit the `CodeIgniter Downloads
