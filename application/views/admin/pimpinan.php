@@ -7,10 +7,64 @@
 
 	</div>
 
+	<div class="row">
+		<div class="col-xl-4 mb-4">
+			<div class="card border-left-success shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+								Laporan Diterima</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($report_valid) ?></div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-check-circle fa-2x text-success"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-xl-4 mb-4">
+
+			<div class="card border-left-warning shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+								Laporan Tertunda</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($report_delay) ?></div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="col-xl-4 mb-4">
+			<div class="card border-left-danger shadow h-100 py-2">
+				<div class="card-body">
+					<div class="row no-gutters align-items-center">
+						<div class="col mr-2">
+							<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+								Laporan Ditolak</div>
+							<div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($report_reject) ?></div>
+						</div>
+						<div class="col-auto">
+							<i class="fas fa-times-circle fa-2x text-danger"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
 	<!-- Content Row -->
 	<div class="row">
 
-		<div class="col-xl-8">
+		<div class="col-xl-12">
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
 					<h6 class="m-0 font-weight-bold text-primary">Ini aktivitas laporan karyawan anda, Pimpinan!</h6>
@@ -19,62 +73,6 @@
 					<canvas id="statistik_bulan" class="w-full h-full" height="120"></canvas>
 				</div>
 			</div>
-		</div>
-
-		<div class="col-xl-4">
-			<div class=" mb-4">
-				<div class="card border-left-success shadow h-100 py-2">
-					<div class="card-body">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
-								<div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-									Laporan Diterima</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($report_valid) ?></div>
-							</div>
-							<div class="col-auto">
-								<i class="fas fa-check-circle fa-2x text-success"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class=" mb-4">
-				<div class="card border-left-warning shadow h-100 py-2">
-					<div class="card-body">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
-								<div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-									Laporan Tertunda</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($report_delay) ?></div>
-							</div>
-							<div class="col-auto">
-								<i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-			<div class=" mb-4">
-				<div class="card border-left-danger shadow h-100 py-2">
-					<div class="card-body">
-						<div class="row no-gutters align-items-center">
-							<div class="col mr-2">
-								<div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
-									Laporan Ditolak</div>
-								<div class="h5 mb-0 font-weight-bold text-gray-800"><?= number_format($report_reject) ?></div>
-							</div>
-							<div class="col-auto">
-								<i class="fas fa-times-circle fa-2x text-danger"></i>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
 		</div>
 	</div>
 

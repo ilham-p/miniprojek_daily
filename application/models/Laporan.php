@@ -2,6 +2,7 @@
 
 class Laporan extends CI_Model
 {
+
 	public function kodelaporan()
 	{
 		return hash('md5', strtotime(date('Y-m-d h:i:s')));
@@ -21,21 +22,20 @@ class Laporan extends CI_Model
 	 */
 	public function get_laporan($status = null, $pelapor = null)
 	{
+		$awal = date("Y/m/d", strtotime("last day of previous month"));
+		$akhir = date("Y/m/d", strtotime("first day of next month"));
 		if ($status) {
 			if ($pelapor) {
-				return $this->db->get_where('laporan', array('status' => $status))->result();
-			} else {
-				return $this->db->get_where('laporan', array('status' => $status, 'pelapor' => $pelapor))->result();
+				return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->get_where('laporan', array('status' => $status, 'pelapor' => $pelapor))->result();
 			}
+				return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->get_where('laporan', array('status' => $status))->result();
 		}
-		$tg_akhir = days_in_month(date('m'), date('Y'));
-		$bulan = date('m');
-		$tahun = date('Y');
-		return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->where("tanggalposting BETWEEN '{$tahun}/{$bulan}/1' AND '{$tahun}/{$bulan}/{$tg_akhir}'")->get('laporan')->result();
+
+		return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->where("tanggalposting BETWEEN '{$awal}' AND '{$akhir}'")->get('laporan')->result();
 	}
 
 
-	public function get_laporan_karyawan($pelapor = null,$status = null )
+	public function get_laporan_karyawan($pelapor = null, $status = null)
 	{
 
 		if ($pelapor) {
@@ -49,13 +49,13 @@ class Laporan extends CI_Model
 
 	public function count_laporan_bulanan($status = null)
 	{
-		$tg_akhir = days_in_month(date('m'), date('Y'));
-		$bulan = date('m');
-		$tahun = date('Y');
+		$awal = date("Y/m/d", strtotime("last day of previous month"));
+		$akhir = date("Y/m/d", strtotime("first day of next month"));
+
 		if ($status) {
-			return $this->db->select('COUNT(*) AS data, tanggalposting')->join('karyawan', 'karyawan.id = laporan.pelapor')->where("status = {$status} AND tanggalposting BETWEEN '{$tahun}/{$bulan}/1' AND '{$tahun}/{$bulan}/{$tg_akhir}'")->group_by('DATE(laporan.tanggalposting)')->get('laporan')->result();
+			return $this->db->select('COUNT(*) AS data, tanggalposting')->join('karyawan', 'karyawan.id = laporan.pelapor')->where("status = {$status} AND tanggalposting BETWEEN '{$awal}' AND '{$akhir}'")->group_by('DATE(laporan.tanggalposting)')->get('laporan')->result();
 		}
-		return $this->db->select('COUNT(*) AS data, tanggalposting')->join('karyawan', 'karyawan.id = laporan.pelapor')->where("tanggalposting BETWEEN '{$tahun}/{$bulan}/1' AND '{$tahun}/{$bulan}/{$tg_akhir}'")->group_by('DATE(laporan.tanggalposting)')->get('laporan')->result();
+		return $this->db->select('COUNT(*) AS data, tanggalposting')->join('karyawan', 'karyawan.id = laporan.pelapor')->where("tanggalposting BETWEEN '{$awal}' AND '{$akhir}'")->group_by('DATE(laporan.tanggalposting)')->get('laporan')->result();
 	}
 
 	/**
@@ -98,5 +98,20 @@ class Laporan extends CI_Model
 			return $this->db->get()->num_rows();
 		}
 		return null;
+	}
+
+	public function update_laporan($mode, $id)
+	{
+		$this->db->where('kodelaporan', $id);
+		switch($mode) {
+			case 'accept':
+				$this->db->set('status', 2);
+				$this->db->update('laporan');
+				break;
+			case 'reject':
+				$this->db->set('status', 3);
+				$this->db->update('laporan');
+				break;
+		}
 	}
 }

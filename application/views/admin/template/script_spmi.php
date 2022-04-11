@@ -1,190 +1,57 @@
 <script>
-	$('.toast').toast();
-	const tabelLaporan = $("#laporan_bulan").DataTable({
-		ajax: '<?= base_url('admin/laporan') ?>',
+	$(document).ready(function() {
+		$('.acc_btn').click(function(event) {
+			alert('asdsad')
+		});
+	})
+	const tabelLaporanMasuk = $("#laporan_masuk").DataTable({
+		ajax: '<?= base_url('admin/laporan_masuk') ?>',
 		lengthChange: false,
 		columnDefs: [{
-			targets: 3,
+			targets: 4,
 			data: null,
+			className: 'text-center',
 			render: function(data, type, row, meta) {
-				switch (data[3]) {
-					case '1':
-						return 'Tertunda';
-						break;
-					case '2':
-						return 'Diterima';
-						break;
-					case '3':
-						return 'Ditolak';
-						break;
-				}
+				return `<a href="javascript:void(0)" class="acc_btn fa-stack fa-1x text-success" data-id="${data[4]}" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-check fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></a> 
+				<a href="javascript:void(0)" class="reject_btn fa-stack text-danger fa-1x" data-id="${data[4]}" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-ban fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></a>`;
+
+				// <a href="javascript:void(0)" class="fa-stack fa-1x" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-check fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></a>
 			}
 		}]
 	});
-</script>
 
-<script>
-	const tabelKaryawan = $("#karyawan_list").DataTable({
-		ajax: "<?= base_url('admin/karyawan') ?>",
-		lengthChange: false,
-	});
-</script>
-<script>
-	const stats_bulan = $("#statistik_bulan");
-
-
-	const diterima = []
-
-	const _diterima = $.ajax({
-		url: '<?= base_url('admin/stats_chart/2') ?>',
-		method: 'post',
-		success: (e) => {
-			e = JSON.parse(e);
-			res = [];
-			for (let x in e) {
-				diterima.push(e[x]);
-			}
-		}
-	});
-	const _ditunda = $.ajax({
-		url: '<?= base_url('admin/stats_chart/1') ?>',
-		method: 'post',
-		success: (e) => {
-			e = JSON.parse(e);
-			res = [];
-			for (let x in e) {
-				diterima.push(e[x]);
-			}
-		}
-	});
-
-	const _ditolak = $.ajax({
-		url: '<?= base_url('admin/stats_chart/3') ?>',
-		method: 'post',
-		success: (e) => {
-			e = JSON.parse(e);
-			res = [];
-			for (let x in e) {
-				diterima.push(e[x]);
-			}
-		}
-	})
-	$.when(_diterima, _ditolak, _ditunda).done((x1, x2, x3) => {
-
-		$res1 = JSON.parse(x1[0])
-		$res2 = JSON.parse(x2[0])
-		$res3 = JSON.parse(x3[0])
-
-
-		const myChart = new Chart(stats_bulan, {
-			type: "bar",
+	$('#laporan_masuk tbody').on('click', '.acc_btn', function() {
+		const data = $(this).data('id')
+		$.ajax({
+			// Acc Laporan
+			url: '<?= base_url('admin/laporan_acc/accept/') ?>',
+			method: 'POST',
 			data: {
-				datasets: [{
-						label: "Diterima",
-						data: $res1,
-						borderColor: '#85e085',
-						borderWidth: 2,
-						tension: 0.2,
-						order: 0,
-						spanGaps: true,
-					},
-					{
-						label: "Ditolak",
-						data: $res2,
-						borderColor: '#ff66a3',
-						borderWidth: 2,
-						tension: 0.2,
-						order: 1,
-						spanGaps: true,
-					}, {
-						label: "Tertunda",
-						data: $res3,
-						borderColor: '#ffff66',
-						borderWidth: 2,
-						tension: 0.2,
-						order: 2,
-						spanGaps: true,
-					}
-				],
+				id: data
 			},
-			options: {
+			success: function(e) {
+				$('#toast-container').html(toastNotif('fa-check', `Laporan Disetujui!`, `Data laporan <i><b>${data}</b></i> telah anda setujui.`, 'bg-success', 'text-white'))
+				$('.toast').toast('show');
+				tabelLaporanMasuk.ajax.reload()
+			}
+		})
+	});
 
-				scales: {
-					y: {
-						beginAtZero: true,
-					},
-					x: {
-						type: "time",
-						time: {
-							unit: 'day',
-						}
 
-					},
-				},
+	$('#laporan_masuk tbody').on('click', '.reject_btn', function() {
+		const data = $(this).data('id')
+		$.ajax({
+			// Acc Laporan
+			url: '<?= base_url('admin/laporan_acc/reject/') ?>',
+			method: 'POST',
+			data: {
+				id: data
 			},
-		});
-	})
-</script>
-
-<script>
-	const nama = $('input[name="nama_karyawan"]')
-	const email = $('input[name="email_karyawan"]')
-	const jabatan = $('select[name="jabatan_karyawan"]')
-	const jobdesk = $('select[name="jobdesk_karyawan"]')
-	const bio = $('textarea[name="bio_karyawan"]')
-
-	$(jabatan).on('change', function(e) {
-		let _curJabatan = jabatan.val();
-		if (_curJabatan != 0) {
-			$.ajax({
-				url: '<?= base_url('admin/jabatan_jobdesk/') ?>' + _curJabatan,
-				success: function(x) {
-					let data = JSON.parse(x);
-					// console.log(data[0]);
-					let items = '';
-					data.forEach(x => {
-						// console.log(x)
-						items += `<option value="${x.kodejobdesk}">${x.namajobdesk}</option>`
-						$(jobdesk).attr('disabled', false)
-					})
-					$(jobdesk).html(items)
-				}
-			})
-		} else {
-			$(jobdesk).html('');
-			$(jobdesk).attr('disabled', true)
-		}
-	})
-
-	$('#karyawan_add').submit((e) => {
-		e.preventDefault();
-
-		// Ambil value
-		// verifikasi value
-		if (jabatan.val() && nama.val() && email.val() && jobdesk.val() != '') {
-			$.ajax({
-				url: '<?= base_url('admin/karyawan_submit') ?>',
-				data: {
-					nama: nama.val(),
-					email: email.val(),
-					jabatan: jabatan.val(),
-					jobdesk: jobdesk.val(),
-					bio: bio.val()
-				},
-				type: 'json',
-				method: 'POST',
-				complete: () => {
-					$('#toast-container').html(toastNotif('fa-check','Karyawan Berhasil Disimpan!', 'Data yang anda input sudah berhasil disimpan', 'bg-success', 'text-white'))
-					$('.toast').toast('show');
-					$('#karyawan_add')[0].reset();
-					$('#karyawan_add').modal('toggle');
-					tabelKaryawan.ajax.reload()
-				}
-			})
-		} else {
-			alert('Harap periksa kembali form anda!')
-		}
-
-		// submit
-	})
+			success: function(e) {
+				$('#toast-container').html(toastNotif('fa-check', `Laporan Tidak Disetujui!`, `Data laporan <i><b>${data}</b></i> tidak anda setujui.`, 'bg-danger', 'text-white'))
+				$('.toast').toast('show');
+				tabelLaporanMasuk.ajax.reload()
+			}
+		})
+	});
 </script>
