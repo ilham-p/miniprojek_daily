@@ -2,10 +2,13 @@
 
 class Laporan extends CI_Model
 {
-	public function input_laporan(array $data = [])
+	public function kodelaporan()
 	{
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		}
+		return hash('md5', strtotime(date('Y-m-d h:i:s')));
+	}
+	public function input_laporan(array $data)
+	{
+		$this->db->insert('laporan', $data);
 	}
 	/**
 	 * Ambil semua data laporan berdasar parameter status,
@@ -30,6 +33,19 @@ class Laporan extends CI_Model
 		$tahun = date('Y');
 		return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->where("tanggalposting BETWEEN '{$tahun}/{$bulan}/1' AND '{$tahun}/{$bulan}/{$tg_akhir}'")->get('laporan')->result();
 	}
+
+
+	public function get_laporan_karyawan($pelapor = null,$status = null )
+	{
+
+		if ($pelapor) {
+			return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->get_where('laporan', array('pelapor' => $pelapor))->result();
+		} else {
+			return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->get_where('laporan', array('status' => $status, 'pelapor' => $pelapor))->result();
+		}
+	}
+
+
 
 	public function count_laporan_bulanan($status = null)
 	{

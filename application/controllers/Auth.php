@@ -30,7 +30,7 @@ class Auth extends CI_Controller
 					'user' => array(
 						'nama' => $data->nama,
 						'email' => $data->email,
-						'code' => $data->code,
+						'id' => $data->id,
 						'jabatan' => $data->jabatan,
 						'jobdesk' => $data->jobdesk
 					)
