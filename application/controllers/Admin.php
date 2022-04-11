@@ -19,9 +19,8 @@ class Admin extends CI_Controller
 			'jobdesk' => $this->Jobdesk->get_jobdesk(),
 		);
 
-		// echo print_r($this->Jabatan->get_jabatan_desk(1));
+		// echo print_r($this->laporan_karyawan(7));
 		$this->x_view($this->session->user['jabatan'], $data);
-
 	}
 
 	public function laporan()
@@ -70,16 +69,22 @@ class Admin extends CI_Controller
 			case 1:
 				$this->load->view('admin/template/head');
 				$this->load->view('admin/pimpinan', $data);
+				$this->load->view('admin/template/plugins');
+				$this->load->view('admin/template/script_admin');
 				$this->load->view('admin/template/foot');
 				break;
 			case 2:
 				$this->load->view('admin/template/head');
 				$this->load->view('admin/spmi', $data);
+				$this->load->view('admin/template/plugins');
+				$this->load->view('admin/template/script_spmi');
 				$this->load->view('admin/template/foot');
 				break;
 			case 3:
 				$this->load->view('admin/template/head');
 				$this->load->view('admin/karyawan', $data);
+				$this->load->view('admin/template/plugins');
+				$this->load->view('admin/template/script_karyawan');
 				$this->load->view('admin/template/foot');
 				break;
 		}
@@ -101,8 +106,7 @@ class Admin extends CI_Controller
 	public function karyawan_submit()
 	{
 		$pass = hash('md5', 'daily123');
-		if($_SERVER['REQUEST_METHOD'] == "POST")
-		{
+		if ($_SERVER['REQUEST_METHOD'] == "POST") {
 			$data = array(
 				'nama' => $this->input->post('nama'),
 				'email' => $this->input->post('email'),
@@ -113,10 +117,36 @@ class Admin extends CI_Controller
 				'bio' => $this->input->post('bio')
 			);
 			$this->Karyawan->add_karyawan($data);
-			
+
 			return array(
 				'status' => 200
 			);
 		}
+	}
+
+	public function laporan_karyawan($id = null)
+	{
+
+		$res = $this->Laporan->get_laporan_karyawan($id);
+		$data = array("data" => array());
+		foreach ($res as $r) {
+			array_push($data['data'], array(date('d/m/Y', strtotime($r->tanggalposting)), $r->kegiatan, $r->status));
+		}
+		echo json_encode($data);
+	}
+
+	public function input_laporan_karyawan()
+	{
+
+		$data = array(
+			'tanggalposting' => $this->input->post('tglKegiatan'),
+			'kegiatan' => $this->input->post('namaKegiatan'),
+			'deskripsi' => $this->input->post('detailKegiatan'),
+			'pelapor' => $this->session->user['id'],
+			'status' => 1,
+			'kodelaporan' => $this->Laporan->kodelaporan()
+		);
+		$res = $this->Laporan->input_laporan($data);
+		return $res;
 	}
 }
