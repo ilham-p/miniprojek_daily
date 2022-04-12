@@ -4,7 +4,7 @@
 	<!-- Page Heading -->
 	<div class="d-sm-flex align-items-center justify-content-between mb-4">
 		<h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-		<a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+		<a href="javascript:void(0)" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#generate_laporan"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
 	</div>
 
 	<!-- Content Row -->
@@ -132,21 +132,70 @@
 	<i class="fas fa-angle-up"></i>
 </a>
 
-<!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+<form class="modal fade" id="generate_laporan" tabindex="-1" aria-hidden="true" action="#">
+	<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-				<button class="close" type="button" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">×</span>
+				<h5 class="modal-title" id="exampleModalLabel">Generate Laporan Karyawan</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="clearForm()">
+					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-			<div class="modal-footer">
-				<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-				<a class="btn btn-primary" href="login.html">Logout</a>
+			<div class="modal-body">
+				<div class="form-group">
+					<div class="form-group form-check">
+						<input type="checkbox" class="form-check-input" id="today" checked="true">
+						<label class="form-check-label small" for="today">Generate Laporan Hari Ini</label>
+					</div>
+					<div class="row">
+						<div class="form-group col">
+							<label>Dari</label>
+							<input id="tgl_dari" name="tgl_dari" class="form-control" placeholder="Nama Lengkap" type="date" min="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d', strtotime('today')) ?>" disabled="true">
+						</div>
+						<div class="form-group col">
+							<label>Sampai</label>
+							<input id="tgl_sampai" name="tgl_sampai" class="form-control" placeholder="Email" type="date" value="<?= date('Y-m-d', strtotime('tomorrow')) ?>" disabled="true">
+						</div>
+					</div>
+
+				</div>
+				<div class="row col">
+					<div class="form-group">
+						<label>Status Laporan</label>
+						<div class="d-flex">
+							<div class="form-group form-check  mr-4">
+								<input type="checkbox" class="form-check-input" id="all_stat" checked="true">
+								<label class="form-check-label small" for="all_stat">Semua Status</label>
+							</div>
+							<div class="form-group form-check  mr-4">
+								<input type="checkbox" class="form-check-input " id="accepted_stat" checked="true">
+								<label class="form-check-label small" for="accepted_stat">Diterima</label>
+							</div>
+							<div class="form-group form-check  mr-4">
+								<input type="checkbox" class="form-check-input " id="reject_stat" checked="true">
+								<label class="form-check-label small" for="reject_stat">Ditolak</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row justify-content-center">
+					<a href="javascript:void(0)" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#generate_laporan"><i class="fas fa-eye fa-sm text-white-50"></i> Pratinjau Data</a>
+				</div> -->
+				<hr>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Nama Kegiatan</th>
+							<th>Deskripsi</th>
+							<th>Pelapor</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="modal-footer justify-content-center">
+				<button onclick="alert('Masih dalam tahap pengembangan')" class="btn btn-success shadow-sm">Download Data</button>
 			</div>
 		</div>
 	</div>
-</div>
+</form>

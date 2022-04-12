@@ -128,12 +128,11 @@
 				<!-- Card Body -->
 				<div class="card-body border-bottom-dark" style="height:200px; overflow: auto;">
 
-					<?php foreach ($jabatan as $j) : ?>
-						<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-							<span><?= $j->namajabatan ?></span>
-
-						</div>
-					<?php endforeach; ?>
+				<ul class="list-group list-group-flush">
+						<?php foreach ($jabatan as $j) : ?>
+							<li class="list-group-item"><?= $j->namajabatan ?></li>
+						<?php endforeach; ?>
+					</ul>
 				</div>
 
 			</div>
@@ -148,11 +147,11 @@
 				</div>
 				<!-- Card Body -->
 				<div class="card-body border-bottom-dark" style="height:200px; overflow: auto;">
-					<?php foreach ($jobdesk as $j) : ?>
-						<div class="w-100 bg-gray-200 py-2 px-3 rounded d-flex justify-content-between align-items-center mb-2">
-							<span><?= $j->namajobdesk ?></span>
-						</div>
-					<?php endforeach; ?>
+					<ul class="list-group list-group-flush">
+						<?php foreach ($jobdesk as $j) : ?>
+							<li class="list-group-item"><?= $j->namajobdesk ?></li>
+						<?php endforeach; ?>
+					</ul>
 				</div>
 			</div>
 		</div>

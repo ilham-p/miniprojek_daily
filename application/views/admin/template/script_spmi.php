@@ -1,9 +1,4 @@
 <script>
-	$(document).ready(function() {
-		$('.acc_btn').click(function(event) {
-			alert('asdsad')
-		});
-	})
 	const tabelLaporanMasuk = $("#laporan_masuk").DataTable({
 		ajax: '<?= base_url('admin/laporan_masuk') ?>',
 		lengthChange: false,
@@ -54,4 +49,25 @@
 			}
 		})
 	});
+</script>
+
+
+<script>
+	tglDari = $('#tgl_dari')
+	tglSampai = $('#tgl_sampai')
+	toggleTgl = $('#today[type="checkbox"]')
+
+	$(document).ready(function() {
+		toggleTgl.on('change', function() {
+			if(!toggleTgl.is(":checked")) {
+				console.log(true)
+				tglDari.attr('disabled', false)
+				tglSampai.attr('disabled', false)
+			} else {
+				console.log(false)
+				tglDari.attr('disabled', true)
+				tglSampai.attr('disabled', true)
+			}
+		})
+	})
 </script>
