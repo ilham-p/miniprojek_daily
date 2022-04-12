@@ -2,6 +2,15 @@
 
 class Auth extends CI_Controller
 {
+	public function __construct()
+	{
+		parent::__construct();
+		if(isset($this->session->user))
+			redirect('admin');
+	}
+
+
+
 	/**
 	 * Method untuk login, dan autentikasi user dari database
 	 * 
@@ -51,9 +60,5 @@ class Auth extends CI_Controller
 	}
 
 
-	public function logout()
-	{
-		$this->session->sess_destroy();
-		redirect('/');
-	}
+	
 }

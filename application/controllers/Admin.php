@@ -5,6 +5,13 @@ class Admin extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		if(!isset($this->session->user))
+			redirect('login');
+	}
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('/');
 	}
 
 	function index()
@@ -163,8 +170,7 @@ class Admin extends CI_Controller
 	public function laporan_acc($mode)
 	{
 		$id = $this->input->post('id');
-		switch($mode)
-		{
+		switch ($mode) {
 			case 'accept':
 				$this->Laporan->update_laporan($mode, $id);
 				break;
