@@ -22,4 +22,22 @@ CodeIgniter adalah Kerangka Pengembangan Aplikasi - sebuah toolkit - untuk orang
 
 	Setelah dependency selesai terinstal di repositori anda, maka selanjutnya import database repositori.
 
-## <center>Selesai</center>
+## EMBEDED USERNAME DAN PASWORD
+
+Administrator/Pimpinan
+```
+email 		: admin@admin.com
+password	: admin
+```
+
+SPMI
+```
+email		: stevejob@mail.com
+password	: daily123
+```
+
+Karyawan/Dosen
+```
+email		: bisa dilihat di Admin atau tambah data baru
+password	: daily123 (default)
+```
