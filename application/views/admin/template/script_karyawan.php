@@ -17,7 +17,7 @@
 <script>
 	const jobdesk = $('select[name="jobdesk_kegiatan"');
 	$.ajax({
-		url: '<?= base_url('admin/jabatan_jobdesk/') . $this->session->user['jabatan'] ?>',
+		url: '<?= base_url('api/jabatan_jobdesk/') . $this->session->user['jabatan'] ?>',
 		success: function(x) {
 			let data = JSON.parse(x);
 			// console.log(data[0]);
@@ -37,6 +37,7 @@
 	const _tglKegiatan = $('input[name="tgl_kegiatan"]')
 	const _namaKegiatan = $('input[name="nama_kegiatan"]')
 	const _detailKegiatan = $('textarea[name="detail_kegiatan"]')
+	const _jobdeskKegiatan = $('select[name="jobdesk_kegiatan"]')
 	const _form = $('#input_laporan')
 
 	$(_form).submit((e) => {
@@ -46,11 +47,13 @@
 		// verifikasi value
 		if (_tglKegiatan.val() && _namaKegiatan.val() && _detailKegiatan.val() != '') {
 			$.ajax({
-				url: '<?= base_url('admin/input_laporan_karyawan')?>',
+				url: '<?= base_url('api/laporan')?>',
+				method: 'POST',
 				data: {
 					tglKegiatan: _tglKegiatan.val(),
 					namaKegiatan: _namaKegiatan.val(),
-					detailKegiatan: _detailKegiatan.val()
+					detailKegiatan: _detailKegiatan.val(),
+					jobdeskKegiatan: _jobdeskKegiatan.val()
 				},
 				method: 'POST',
 				success: () => {
@@ -73,7 +76,7 @@
 <script>
 	var groupColumn = 2;
 	const laporanKaryawan = $("#laporan_karyawan").DataTable({
-		ajax: '<?= base_url('admin/laporan_karyawan/'). $this->session->user['id'] ?>',
+		ajax: '<?= base_url('api/laporan/'). $this->session->user['id'] ?>',
 		lengthChange: false,
 		displayLength: 10,
 		order: [

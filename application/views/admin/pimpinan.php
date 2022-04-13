@@ -176,7 +176,6 @@
 								<th>Nama</th>
 								<th>Email</th>
 								<th>Jabatan</th>
-								<th>Jobdesk</th>
 							</tr>
 						</thead>
 					</table>

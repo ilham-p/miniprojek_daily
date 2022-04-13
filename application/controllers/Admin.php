@@ -8,11 +8,7 @@ class Admin extends CI_Controller
 		if(!isset($this->session->user))
 			redirect('login');
 	}
-	public function logout()
-	{
-		$this->session->sess_destroy();
-		redirect('/');
-	}
+	
 
 	function index()
 	{
@@ -28,44 +24,6 @@ class Admin extends CI_Controller
 
 		// echo print_r($this->laporan_masuk());
 		$this->x_view($this->session->user['jabatan'], $data);
-	}
-
-	public function laporan()
-	{
-		// ["20/04/2022", "Menulis Karya Ilmiah", "Jhon Doe", "Diterima"]
-		$res = $this->Laporan->get_laporan();
-		$data = array("data" => array());
-		foreach ($res as $r) {
-			array_push($data['data'], array(date('d/m/Y', strtotime($r->tanggalposting)), $r->kegiatan, $r->nama, $r->status));
-		}
-		echo json_encode($data);
-	}
-
-	public function karyawan()
-	{
-		// ["20/04/2022", "Menulis Karya Ilmiah", "Jhon Doe", "Diterima"]
-		$res = $this->Karyawan->get_karyawan();
-		$data = array("data" => array());
-		foreach ($res as $r) {
-			array_push($data['data'], array($r->code, $r->nama, $r->email, $r->namajabatan, $r->namajobdesk));
-		}
-		echo json_encode($data);
-	}
-
-	public function stats_chart($status = null)
-	{
-		$res = $this->Laporan->count_laporan_bulanan($status);
-		$data = array();
-		foreach ($res as $r) {
-			array_push(
-				$data,
-				array(
-					'x' => date('Y-m-d', strtotime($r->tanggalposting)),
-					'y' => $r->data
-				)
-			);
-		}
-		echo json_encode($data);
 	}
 
 	public function x_view($jabatan, $data)
@@ -93,90 +51,5 @@ class Admin extends CI_Controller
 				$this->load->view('admin/template/foot');
 				break;
 		}
-	}
-
-	public function jabatan_jobdesk($id = null)
-	{
-
-		if ($id) {
-			$res = $this->Jabatan->get_jabatan_desk($id);
-			$data = array();
-			foreach ($res as $r) {
-				array_push($data, array($r->kodejobdesk, $r->namajobdesk, $r->keterangan));
-			}
-			echo json_encode($res);
-		}
-	}
-
-	public function karyawan_submit()
-	{
-		$pass = hash('md5', 'daily123');
-		if ($_SERVER['REQUEST_METHOD'] == "POST") {
-			$data = array(
-				'nama' => $this->input->post('nama'),
-				'email' => $this->input->post('email'),
-				'password' => $pass,
-				'code' => $this->Karyawan->algo($this->input->post('nama')),
-				'jabatan' => $this->input->post('jabatan'),
-				'jobdesk' => $this->input->post('jobdesk'),
-				'bio' => $this->input->post('bio')
-			);
-			$this->Karyawan->add_karyawan($data);
-
-			return array(
-				'status' => 200
-			);
-		}
-	}
-
-	public function laporan_karyawan($id = null)
-	{
-
-		$res = $this->Laporan->get_laporan_karyawan($id);
-		$data = array("data" => array());
-		foreach ($res as $r) {
-			array_push($data['data'], array(date('d/m/Y', strtotime($r->tanggalposting)), $r->kegiatan, $r->status));
-		}
-		echo json_encode($data);
-	}
-
-	public function input_laporan_karyawan()
-	{
-
-		$data = array(
-			'tanggalposting' => $this->input->post('tglKegiatan'),
-			'kegiatan' => $this->input->post('namaKegiatan'),
-			'deskripsi' => $this->input->post('detailKegiatan'),
-			'pelapor' => $this->session->user['id'],
-			'status' => 1,
-			'kodelaporan' => $this->Laporan->kodelaporan()
-		);
-		$res = $this->Laporan->input_laporan($data);
-		return $res;
-	}
-
-	public function laporan_masuk()
-	{
-		// ["20/04/2022", "Menulis Karya Ilmiah", "Jhon Doe", "Diterima"]
-		$res = $this->Laporan->get_laporan(1);
-		$data = array("data" => array());
-		foreach ($res as $r) {
-			array_push($data['data'], array(date('d/m/Y', strtotime($r->tanggalposting)), $r->kegiatan, $r->deskripsi, $r->nama, $r->kodelaporan));
-		}
-		echo json_encode($data);
-		// return $data;
-	}
-
-	public function laporan_acc($mode)
-	{
-		$id = $this->input->post('id');
-		switch ($mode) {
-			case 'accept':
-				$this->Laporan->update_laporan($mode, $id);
-				break;
-			case 'reject':
-				$this->Laporan->update_laporan($mode, $id);
-				break;
-		}
-	}
+	}	
 }
