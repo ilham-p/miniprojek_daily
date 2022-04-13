@@ -32,12 +32,12 @@ password	: admin
 
 SPMI
 ```
-email		: stevejob@mail.com
-password	: daily123
+email		: spmi@spmi.com
+password	: spmi
 ```
 
 Karyawan/Dosen
 ```
-email		: bisa dilihat di Admin atau tambah data baru
+email		: karyawan@karyawan.com
 password	: daily123 (default)
 ```
