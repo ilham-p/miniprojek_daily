@@ -92,9 +92,10 @@ class API extends CI_Controller
 				'password' => $pass,
 				'code' => $this->Karyawan->algo($this->input->post('nama')),
 				'jabatan' => $this->input->post('jabatan'),
-				'jobdesk' => $this->input->post('jobdesk'),
+				// 'jobdesk' => $this->input->post('jobdesk'),
 				'bio' => $this->input->post('bio')
 			);
+
 			$this->Karyawan->add_karyawan($data);
 
 			return array(
