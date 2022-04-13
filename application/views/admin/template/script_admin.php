@@ -1,7 +1,7 @@
 <script>
 	$('.toast').toast();
 	const tabelLaporan = $("#laporan_bulan").DataTable({
-		ajax: '<?= base_url('admin/laporan') ?>',
+		ajax: '<?= base_url('api/laporan/all') ?>',
 		lengthChange: false,
 		columnDefs: [{
 			targets: 3,
@@ -25,8 +25,9 @@
 
 <script>
 	const tabelKaryawan = $("#karyawan_list").DataTable({
-		ajax: "<?= base_url('admin/karyawan') ?>",
+		ajax: "<?= base_url('api/karyawan') ?>",
 		lengthChange: false,
+		method: 'GET'
 	});
 </script>
 <script>
@@ -36,7 +37,7 @@
 	const diterima = []
 
 	const _diterima = $.ajax({
-		url: '<?= base_url('admin/stats_chart/2') ?>',
+		url: '<?= base_url('api/laporan/activity/2') ?>',
 		method: 'post',
 		success: (e) => {
 			e = JSON.parse(e);
@@ -47,7 +48,7 @@
 		}
 	});
 	const _ditunda = $.ajax({
-		url: '<?= base_url('admin/stats_chart/1') ?>',
+		url: '<?= base_url('api/laporan/activity/1') ?>',
 		method: 'post',
 		success: (e) => {
 			e = JSON.parse(e);
@@ -59,7 +60,7 @@
 	});
 
 	const _ditolak = $.ajax({
-		url: '<?= base_url('admin/stats_chart/3') ?>',
+		url: '<?= base_url('api/laporan/activity/3') ?>',
 		method: 'post',
 		success: (e) => {
 			e = JSON.parse(e);
@@ -137,7 +138,7 @@
 		let _curJabatan = jabatan.val();
 		if (_curJabatan != 0) {
 			$.ajax({
-				url: '<?= base_url('admin/jabatan_jobdesk/') ?>' + _curJabatan,
+				url: '<?= base_url('api/jabatan_jobdesk/') ?>' + _curJabatan,
 				success: function(x) {
 					let data = JSON.parse(x);
 					// console.log(data[0]);
@@ -163,7 +164,8 @@
 		// verifikasi value
 		if (jabatan.val() && nama.val() && email.val() && jobdesk.val() != '') {
 			$.ajax({
-				url: '<?= base_url('admin/karyawan_submit') ?>',
+				url: '<?= base_url('api/karyawan') ?>',
+				method: 'POST',
 				data: {
 					nama: nama.val(),
 					email: email.val(),

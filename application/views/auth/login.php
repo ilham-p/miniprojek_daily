@@ -17,7 +17,7 @@
 									<h3 class="h6 text-gray-500 mb-4">Silahkan masuk untuk melanjutkan..</h3>
 								</div>
 								<hr>
-								<form class="user" method="POST" action="<?= base_url() ?>">
+								<form class="user" method="POST" id="login">
 									<div class="form-group">
 										<input type="email" class="email form-control form-control-user" name="email" placeholder="Masukan alamat email...">
 									</div>
@@ -38,5 +38,4 @@
 		</div>
 
 	</div>
-
 </div>

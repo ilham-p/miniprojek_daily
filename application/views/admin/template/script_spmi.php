@@ -1,16 +1,12 @@
 <script>
-	$(document).ready(function() {
-		$('.acc_btn').click(function(event) {
-			alert('asdsad')
-		});
-	})
 	const tabelLaporanMasuk = $("#laporan_masuk").DataTable({
-		ajax: '<?= base_url('admin/laporan_masuk') ?>',
+		ajax: '<?= base_url('api/laporan/status/1') ?>',
 		lengthChange: false,
 		columnDefs: [{
 			targets: 4,
 			data: null,
-			className: 'text-center',
+			width: '100px',
+			className: 'text-center align-middle',
 			render: function(data, type, row, meta) {
 				return `<a href="javascript:void(0)" class="acc_btn fa-stack fa-1x text-success" data-id="${data[4]}" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-check fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></a> 
 				<a href="javascript:void(0)" class="reject_btn fa-stack text-danger fa-1x" data-id="${data[4]}" style="flex-shrink: 0;"><i class="fas fa-circle fa-stack-2x"></i> <i class="fas fa-ban fa-stack-1x fa-inverse" style="--fa-inverse:var(--fa-navy);"></i></a>`;
@@ -24,7 +20,7 @@
 		const data = $(this).data('id')
 		$.ajax({
 			// Acc Laporan
-			url: '<?= base_url('admin/laporan_acc/accept/') ?>',
+			url: '<?= base_url('api/laporan/confirm/accept') ?>',
 			method: 'POST',
 			data: {
 				id: data
@@ -42,7 +38,7 @@
 		const data = $(this).data('id')
 		$.ajax({
 			// Acc Laporan
-			url: '<?= base_url('admin/laporan_acc/reject/') ?>',
+			url: '<?= base_url('api/laporan/confirm/reject/') ?>',
 			method: 'POST',
 			data: {
 				id: data
@@ -54,4 +50,25 @@
 			}
 		})
 	});
+</script>
+
+
+<script>
+	tglDari = $('#tgl_dari')
+	tglSampai = $('#tgl_sampai')
+	toggleTgl = $('#today[type="checkbox"]')
+
+	$(document).ready(function() {
+		toggleTgl.on('change', function() {
+			if(!toggleTgl.is(":checked")) {
+				console.log(true)
+				tglDari.attr('disabled', false)
+				tglSampai.attr('disabled', false)
+			} else {
+				console.log(false)
+				tglDari.attr('disabled', true)
+				tglSampai.attr('disabled', true)
+			}
+		})
+	})
 </script>

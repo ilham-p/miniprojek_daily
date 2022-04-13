@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>SB Admin 2 - Dashboard</title>
+	<title>Dashboard | Daily Report App</title>
 
 	<!-- Custom fonts for this template-->
 	<link href="<?= base_url('assets/vendor/fontawesome-free/css/all.min.css') ?>" rel="stylesheet" type="text/css">
@@ -87,7 +87,7 @@
 							<div class="modal-body">Apakah anda yakin ingin keluar?</div>
 							<div class="modal-footer">
 								<button class="btn btn-secondary" type="button" data-dismiss="modal">Batal</button>
-								<a class="btn btn-primary" href="<?= base_url('auth/logout') ?>">Ya, keluar.</a>
+								<a class="btn btn-primary" href="<?= base_url('logout') ?>">Ya, keluar.</a>
 							</div>
 						</div>
 					</div>
