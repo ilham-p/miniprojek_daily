@@ -3,13 +3,13 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2022 at 09:14 PM
+-- Generation Time: Apr 13, 2022 at 09:20 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
-SET time_zone = "+08:00";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -111,7 +111,7 @@ CREATE TABLE `karyawan` (
 
 INSERT INTO `karyawan` (`id`, `code`, `nama`, `bio`, `jabatan`, `password`, `email`) VALUES
 (1, '0302F', 'Jhon Doe', 'Saya seorang pemimpin perusahaan Twins Mountain di Selatan Bumi.', 1, '21232f297a57a5a743894a0e4a801fc3', 'admin@admin.com'),
-(2, '042HH', 'Steve Job', 'Saya adalah pengawas Profesional dalam berbagai bidang, dan akan selalu mengawasi setiap detail karyawan.', 2, '21232f297a57a5a743894a0e4a801fc3', 'spmi@spmi.com'),
+(2, '042HH', 'Steve Job', 'Saya adalah pengawas Profesional dalam berbagai bidang, dan akan selalu mengawasi setiap detail karyawan.', 2, '7e3d86b75c091118b07071ab26737aae\n', 'spmi@spmi.com'),
 (3, '030B3', 'Sri Sulastri', 'Saya adalah karyawan yang profesional, dan saya akan selalu mematuhi perintah dari atasan sebagai bentuk profesionalitas saya.', 3, '826e80abdb355e21caf30aafe904ff64', 'karyawan@karyawan.com');
 
 -- --------------------------------------------------------
