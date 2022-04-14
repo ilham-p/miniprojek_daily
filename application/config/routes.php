@@ -20,6 +20,8 @@ $route['api/laporan/activity/(:num)']['POST'] = 'api/chart_activity/$1';
 $route['api/laporan/status/(:any)']['GET'] = 'api/laporan_masuk/$1';
 $route['api/laporan/confirm/(:any)']['POST'] = 'api/laporan_acc/$1';
 $route['api/laporan']['POST'] = 'api/input_laporan_karyawan';
+$route['api/laporan/ranged']['POST'] = 'api/laporan_ranged';
+$route['api/laporan/export'] = 'api/export';
 $route['api/laporan/(:any)']['GET'] = 'api/laporan_karyawan/$1';
 
 

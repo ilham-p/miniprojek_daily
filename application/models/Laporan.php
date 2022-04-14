@@ -28,7 +28,7 @@ class Laporan extends CI_Model
 			if ($pelapor) {
 				return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->get_where('laporan', array('status' => $status, 'pelapor' => $pelapor))->result();
 			}
-				return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->get_where('laporan', array('status' => $status))->result();
+			return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->get_where('laporan', array('status' => $status))->result();
 		}
 
 		return $this->db->join('karyawan', 'karyawan.id = laporan.pelapor')->where("tanggalposting BETWEEN '{$awal}' AND '{$akhir}'")->get('laporan')->result();
@@ -103,7 +103,7 @@ class Laporan extends CI_Model
 	public function update_laporan($mode, $id)
 	{
 		$this->db->where('kodelaporan', $id);
-		switch($mode) {
+		switch ($mode) {
 			case 'accept':
 				$this->db->set('status', 2);
 				$this->db->update('laporan');
@@ -112,6 +112,40 @@ class Laporan extends CI_Model
 				$this->db->set('status', 3);
 				$this->db->update('laporan');
 				break;
+		}
+	}
+
+	public function get_laporan_ranged($status = null, $range = [])
+	{
+		// return $this->db->get('laporan')->result();
+		$this->db->select('laporan.kegiatan, laporan.deskripsi, karyawan.nama, laporan.status');
+		$this->db->join('karyawan', 'karyawan.id=laporan.pelapor');
+
+		if ($range) {
+			if ($status) {
+				// Status terdapat value ambil sesuai status
+				$this->db->where('laporan.status', $status);
+				$this->db->where('laporan.tanggalposting>=', $range[0]);
+				$this->db->where('laporan.tanggalposting<=', $range[1]);
+				return $this->db->get('laporan')->result();
+			} else {
+
+				$this->db->where('laporan.tanggalposting>=', $range[0]);
+				$this->db->where('laporan.tanggalposting<=', $range[1]);
+				return $this->db->get('laporan')->result();
+			}
+
+		} else {
+			if ($status) {
+				// Status terdapat value ambil sesuai status
+				$this->db->where('laporan.status', $status);
+				$this->db->where('laporan.tanggalposting', date('Y-m-d'));
+				return $this->db->get('laporan')->result();
+			} else {
+
+				$this->db->where('laporan.tanggalposting', date('Y-m-d'));
+				return $this->db->get('laporan')->result();
+			}
 		}
 	}
 }

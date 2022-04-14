@@ -22,8 +22,9 @@ class Admin extends CI_Controller
 			'jobdesk' => $this->Jobdesk->get_jobdesk(),
 		);
 
-		// echo print_r($this->laporan_masuk());
+		// echo print_r($this->API->laporan_ranged());
 		$this->x_view($this->session->user['jabatan'], $data);
+		// $this->load->view('admin/template/export', $data);
 	}
 
 	public function x_view($jabatan, $data)

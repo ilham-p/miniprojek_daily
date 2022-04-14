@@ -54,13 +54,19 @@
 
 
 <script>
+	const generateForm = $('#generate_laporan')
+	const tbPreview = $('#data_preview')
+	tglIni = $('#hari_ini')
 	tglDari = $('#tgl_dari')
 	tglSampai = $('#tgl_sampai')
-	toggleTgl = $('#today[type="checkbox"]')
+	toggleTgl = $('#hari_ini[type="checkbox"]')
+	accepted = $('#accepted_stat[type="checkbox"]')
+	rejected = $('#reject_stat[type="checkbox"]')
+
 
 	$(document).ready(function() {
 		toggleTgl.on('change', function() {
-			if(!toggleTgl.is(":checked")) {
+			if (!toggleTgl.is(":checked")) {
 				console.log(true)
 				tglDari.attr('disabled', false)
 				tglSampai.attr('disabled', false)
@@ -70,5 +76,42 @@
 				tglSampai.attr('disabled', true)
 			}
 		})
+		tglDari.on('change', function() {
+			var date = new Date(tglDari.val());
+			date.setDate(date.getDate() + 1);
+
+			tglSampai.attr("min", date.toISOString().split('T')[0])
+		})
+
+		tglSampai.on('change', function() {
+			var date = new Date(tglSampai.val());
+			date.setDate(date.getDate() - 1);
+			tglDari.attr("max", date.toISOString().split('T')[0])
+		})
+
+
+
+
+		// generateForm.submit((e) => {
+		// 	e.preventDefault()
+
+		// 	$.ajax({
+		// 		url: '<?= base_url('api/laporan/export') ?>',
+		// 		method: 'GET',
+		// 		data: {
+		// 			hariIni: toggleTgl.val(),
+		// 			tgl_dari: tglDari.val(),
+		// 			tgl_sampai: tglSampai.val(),
+		// 			acceptedStat: accepted.val(),
+		// 			rejectedStat: rejected.val()
+
+		// 		},
+		// 		success: function(e) {
+		// 			e = JSON.parse(e)
+		// 			console.log(e)
+		// 		}
+		// 	})
+		// })
+
 	})
 </script>
