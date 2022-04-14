@@ -1,5 +1,8 @@
 <?php
 
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 class API extends CI_Controller
 {
 
@@ -154,7 +157,6 @@ class API extends CI_Controller
 		);
 		$res = $this->Laporan->input_laporan($data);
 		echo json_encode(var_dump($res));
-		
 	}
 
 	public function laporan_karyawan($id = null)
@@ -172,5 +174,90 @@ class API extends CI_Controller
 	{
 		$this->session->sess_destroy();
 		redirect('/');
+	}
+
+	public function laporan_ranged()
+	{
+		switch ($this->input->post('param')) {
+			case 'today':
+				echo json_encode($this->Laporan->get_laporan_ranged());
+				break;
+			case 'ranged':
+				$tgl = array(
+					date('Y-m-d', strtotime($this->input->post('tglAwal'))),
+					date('Y-m-d', strtotime($this->input->post('tglAkhir')))
+				);
+				$acc = $this->input->post('statusAcc');
+				$rej = $this->input->post('statusRej');
+
+				if (($acc == $rej) == false) {
+					if ($acc == 'true')
+						echo json_encode($this->Laporan->get_laporan_ranged(2, $tgl));
+					else if ($rej == 'true')
+						echo json_encode($this->Laporan->get_laporan_ranged(3, $tgl));
+				} else {
+					if ($acc == 'false' || $rej == 'false')
+						echo json_encode(null);
+					else
+						echo json_encode($this->Laporan->get_laporan_ranged(null, $tgl));
+				}
+				break;
+			default:
+				echo json_encode(array('data' => []));
+		}
+	}
+
+	public function export()
+	{
+		$data = null;
+
+		$hariIni = $this->input->post('hariIni');
+		$tglAwal = $this->input->post('tgl_dari');
+		$tglAkhir = $this->input->post('tgl_sampai');
+		$accStat = $this->input->post('acceptedStat');
+		$rejStat = $this->input->post('rejectedStat');
+
+		if ($hariIni == 'on') {
+			// echo ($hariIni == 'on');
+
+			if ($accStat == 'on' && $rejStat == 'on') {
+				$data = array('data' => $this->Laporan->get_laporan_ranged(null));
+			} else if ($accStat == 'on') {
+				$data = array('data' => $this->Laporan->get_laporan_ranged(2));
+			} else if ($rejStat == 'on') {
+				$data = array('data' => $this->Laporan->get_laporan_ranged(3));
+			} else {
+				$data = null;
+			}
+		} else {
+
+			$tgl = array(
+				date('Y-m-d', strtotime($tglAwal)),
+				date('Y-m-d', strtotime($tglAkhir))
+
+			);
+			if ($accStat == 'on' && $rejStat == 'on') {
+				$data = array('data' => $this->Laporan->get_laporan_ranged(null, $tgl));
+			} else if ($accStat == 'on') {
+				$data = array('data' => $this->Laporan->get_laporan_ranged(2, $tgl));
+			} else if ($rejStat == 'on') {
+				$data = array('data' => $this->Laporan->get_laporan_ranged(3, $tgl));
+			}
+		}
+		$html = $this->load->view('admin/template/export', $data, true);
+		$filename = 'DailyReport_' . strtotime(date('Y-m-d H:i:s'));
+
+		$options = new Options();
+		$options->set('isRemoteEnabled', TRUE);
+		$dompdf = new Dompdf($options);
+		$dompdf->loadHtml($html);
+		$dompdf->setPaper('A4', 'landscape');
+		$dompdf->render();
+		$dompdf->stream($filename . ".pdf", array("Attachment" => 1));
+		$dompdf->output();
+		// if ($stream) {
+		// } else {
+
+		// }
 	}
 }

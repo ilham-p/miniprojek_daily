@@ -132,7 +132,7 @@
 	<i class="fas fa-angle-up"></i>
 </a>
 
-<form class="modal fade" id="generate_laporan" tabindex="-1" aria-hidden="true" action="#">
+<form class="modal fade" id="generate_laporan" tabindex="-1" aria-hidden="true" action="<?= base_url('api/laporan/export') ?>" method="POST">
 	<div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -142,19 +142,20 @@
 				</button>
 			</div>
 			<div class="modal-body">
+				<input id="today" name="hari_ini" class="form-control" type="date" value="<?= date('Y-m-d', strtotime('today')) ?>" hidden>
 				<div class="form-group">
 					<div class="form-group form-check">
-						<input type="checkbox" class="form-check-input" id="today" checked="true">
-						<label class="form-check-label small" for="today">Generate Laporan Hari Ini</label>
+						<input type="checkbox" class="form-check-input" id="hari_ini" checked="true" name="hariIni">
+						<label class="form-check-label small" for="hari_ini">Generate Laporan Hari Ini</label>
 					</div>
 					<div class="row">
 						<div class="form-group col">
 							<label>Dari</label>
-							<input id="tgl_dari" name="tgl_dari" class="form-control" placeholder="Nama Lengkap" type="date" min="<?= date('Y-m-d') ?>" value="<?= date('Y-m-d', strtotime('today')) ?>" disabled="true">
+							<input id="tgl_dari" name="tgl_dari" class="form-control" placeholder="Nama Lengkap" type="date" max="<?=date('Y-m-d')?>" value="<?= date('Y-m-d', strtotime('today')) ?>" disabled="true">
 						</div>
 						<div class="form-group col">
 							<label>Sampai</label>
-							<input id="tgl_sampai" name="tgl_sampai" class="form-control" placeholder="Email" type="date" value="<?= date('Y-m-d', strtotime('tomorrow')) ?>" disabled="true">
+							<input id="tgl_sampai" name="tgl_sampai" class="form-control" placeholder="Email" type="date" min="<?= date('Y-m-d', strtotime('tomorrow')) ?>" value="<?= date('Y-m-d', strtotime('tomorrow')) ?>" disabled="true">
 						</div>
 					</div>
 
@@ -164,15 +165,11 @@
 						<label>Status Laporan</label>
 						<div class="d-flex">
 							<div class="form-group form-check  mr-4">
-								<input type="checkbox" class="form-check-input" id="all_stat" checked="true">
-								<label class="form-check-label small" for="all_stat">Semua Status</label>
+								<input type="checkbox" class="form-check-input " id="accepted_stat" checked="true" name="acceptedStat">
+								<label class="form-check-label small" for="accepted_stat" >Diterima</label>
 							</div>
 							<div class="form-group form-check  mr-4">
-								<input type="checkbox" class="form-check-input " id="accepted_stat" checked="true">
-								<label class="form-check-label small" for="accepted_stat">Diterima</label>
-							</div>
-							<div class="form-group form-check  mr-4">
-								<input type="checkbox" class="form-check-input " id="reject_stat" checked="true">
+								<input type="checkbox" class="form-check-input " id="reject_stat" name="rejectedStat" checked="true">
 								<label class="form-check-label small" for="reject_stat">Ditolak</label>
 							</div>
 						</div>
@@ -181,8 +178,8 @@
 				<!-- <div class="row justify-content-center">
 					<a href="javascript:void(0)" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" data-toggle="modal" data-target="#generate_laporan"><i class="fas fa-eye fa-sm text-white-50"></i> Pratinjau Data</a>
 				</div> -->
-				<hr>
-				<table class="table table-bordered">
+				<!-- <hr>
+				<table class="table table-bordered" id="data_preview">
 					<thead>
 						<tr>
 							<th>Nama Kegiatan</th>
@@ -191,10 +188,10 @@
 							<th>Status</th>
 						</tr>
 					</thead>
-				</table>
+				</table> -->
 			</div>
 			<div class="modal-footer justify-content-center">
-				<button onclick="alert('Masih dalam tahap pengembangan')" class="btn btn-success shadow-sm">Download Data</button>
+				<button type="submit" class="btn btn-success shadow-sm" >Download Data</button>
 			</div>
 		</div>
 	</div>
