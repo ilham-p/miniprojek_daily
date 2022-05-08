@@ -17,12 +17,15 @@ CodeIgniter adalah Kerangka Pengembangan Aplikasi - sebuah toolkit - untuk orang
 	Untuk menginstall dependency anda bisa buka terminal pada repositori anda, kemudian ketikan perintah :
 	```
 	composer install
+	
+	npm install
 	```
+	
 - Import Database
 
 	Setelah dependency selesai terinstal di repositori anda, maka selanjutnya import database repositori.
 
-## Embeded Username & Password
+### Embeded Username & Password
 
 Administrator/Pimpinan
 ```
